@@ -1,32 +1,93 @@
-import React from "react";
-import {Image, Nav, Navbar} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Nav, Navbar} from "react-bootstrap";
 import "./App.css";
 import Routes from "./containers/Routes/Routes";
+import {Link, withRouter} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
+import { Auth } from "aws-amplify";
 
 function App(props) {
+    const [isAuthenticated, userHasAuthenticated] = useState(false);
+    const [isAuthenticating, setIsAuthenticating] = useState(true);
+
+    useEffect(() => {
+        onLoad();
+    }, []);
+
+    async function onLoad() {
+        try {
+            await Auth.currentSession();
+            userHasAuthenticated(true);
+        }
+        catch(e) {
+            if (e !== 'No current user') {
+                alert(e);
+            }
+        }
+
+        setIsAuthenticating(false);
+    }
+
+    async function handleLogout() {
+        await Auth.signOut();
+
+        userHasAuthenticated(false);
+
+        props.history.push("/login");
+    }
+
     return (
+        !isAuthenticating &&
         <div className="App container">
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="/">
-                    <Image src="https://sun9-54.userapi.com/jrNusnwCntVjQNjhVzjCEN3fQaxovEIEBA_Yyw/ry3a-B8x9bA.jpg?ava=1" height="50px"/>
+                <Navbar.Brand>
+                    <Link to="/">Пазаак</Link>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="head-navbar"/>
+                <Navbar.Collapse id="head-navbar">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/play">Играть</Nav.Link>
-                        <Nav.Link href="/rules">Правила</Nav.Link>
-                        <Nav.Link href="/shop">Магазин</Nav.Link>
-                        <Nav.Link href="/shop">Рекорды</Nav.Link>
+                        {isAuthenticated
+                            ? <>
+                            <LinkContainer to="/play">
+                                <Nav.Link>Играть</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/rules">
+                                <Nav.Link>Правила</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/shop">
+                                <Nav.Link>Магазин</Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/top">
+                                <Nav.Link>Рекорды</Nav.Link>
+                            </LinkContainer>
+                            </>
+                            : <>
+                            </>
+                        }
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/profile">Профиль</Nav.Link>
-                        <Nav.Link href="/logout">Выйти</Nav.Link>
+                        {isAuthenticated
+                            ? <>
+                                <LinkContainer to="/profile">
+                                    <Nav.Link>Профиль</Nav.Link>
+                                </LinkContainer>
+                                <Nav.Link onClick={handleLogout}>Выход</Nav.Link>
+                            </>
+                            : <>
+                                <LinkContainer to="/signup">
+                                    <Nav.Link>Регистрация</Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/login">
+                                    <Nav.Link>Вход</Nav.Link>
+                                </LinkContainer>
+                            </>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Routes />
+            <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
         </div>
     );
 }
 
-export default App;
+export default withRouter(App);
