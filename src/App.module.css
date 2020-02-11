@@ -5,3 +5,7 @@
 .App .navbar-brand {
     font-weight: bold;
 }
+
+#PazaakMainMenu {
+    cursor: pointer;
+}
