@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
 import { Auth } from "aws-amplify";
+import s from "./Signup.module.css";
 
 
 export default function Signup(props) {
@@ -71,14 +72,14 @@ export default function Signup(props) {
         return (
             <form onSubmit={handleConfirmationSubmit}>
                 <FormGroup controlId="confirmationCode" bsSize="large">
-                    <FormLabel>Confirmation Code</FormLabel>
+                    <FormLabel>Введите код подтверждения</FormLabel>
                     <FormControl
                         autoFocus
                         type="tel"
                         onChange={handleFieldChange}
                         value={fields.confirmationCode}
                     />
-                    <FormText className="text-muted">Please check your email for the code.</FormText>
+                    <FormText className="text-muted">Проверьте свой почтовый ящик.</FormText>
                 </FormGroup>
                 <LoaderButton
                     block
@@ -136,14 +137,14 @@ export default function Signup(props) {
                     isLoading={isLoading}
                     disabled={!validateForm()}
                 >
-                    Signup
+                    Зарегистрироваться
                 </LoaderButton>
             </form>
         );
     }
 
     return (
-        <div className="Signup">
+        <div className={s.Signup}>
             {newUser === null ? renderForm() : renderConfirmationForm()}
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import "./Login.css";
+import s from "./Login.module.css";
 import { Auth } from "aws-amplify";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
 import {useFormFields} from "../../libs/hooksLib";
@@ -40,7 +40,7 @@ export default function Login(props) {
     }
 
     return (
-        <div className="Login">
+        <div className={s.Login}>
             <form onSubmit={handleSubmit}>
                 <FormGroup controlId="username" bsSize="large">
                     <FormLabel>Имя пользователя</FormLabel>

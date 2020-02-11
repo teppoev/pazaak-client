@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import "./LoaderButton.css";
+import s from "./LoaderButton.module.css";
 
 export default function LoaderButton({
                                          isLoading,
@@ -10,7 +10,7 @@ export default function LoaderButton({
                                      }) {
     return (
         <Button
-            className={`LoaderButton ${className}`}
+            className={`${s.LoaderButton} ${className}`}
             disabled={disabled || isLoading}
             {...props}
         >

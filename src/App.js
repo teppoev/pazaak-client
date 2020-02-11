@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Nav, Navbar} from "react-bootstrap";
-import "./App.css";
+import {Image, Nav, Navbar} from "react-bootstrap";
+import "./App.module.css";
 import Routes from "./containers/Routes/Routes";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
-import { Auth } from "aws-amplify";
+import {Auth} from "aws-amplify";
 
 function App(props) {
     const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -18,8 +18,7 @@ function App(props) {
         try {
             await Auth.currentSession();
             userHasAuthenticated(true);
-        }
-        catch(e) {
+        } catch (e) {
             if (e !== 'No current user') {
                 alert(e);
             }
@@ -41,25 +40,30 @@ function App(props) {
         <div className="App container">
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand>
-                    <Link to="/">Пазаак</Link>
+                    <LinkContainer to="/">
+                        <Image id="PazaakMainMenu"
+                            src="https://external-preview.redd.it/L4S-dK5qg8lTwcfsNygBVLkIB52LicE2nZeG6XNQNgw.png?auto=webp&s=9815c18c109bcd48e74cceabcd8bcd4fa68b74e6"
+                            height="60px"
+                        />
+                    </LinkContainer>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="head-navbar"/>
                 <Navbar.Collapse id="head-navbar">
                     <Nav className="mr-auto">
                         {isAuthenticated
                             ? <>
-                            <LinkContainer to="/play">
-                                <Nav.Link>Играть</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/rules">
-                                <Nav.Link>Правила</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/shop">
-                                <Nav.Link>Магазин</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/top">
-                                <Nav.Link>Рекорды</Nav.Link>
-                            </LinkContainer>
+                                <LinkContainer to="/play">
+                                    <Nav.Link>Играть</Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/rules">
+                                    <Nav.Link>Правила</Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/shop">
+                                    <Nav.Link>Магазин</Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to="/top">
+                                    <Nav.Link>Рекорды</Nav.Link>
+                                </LinkContainer>
                             </>
                             : <>
                             </>
@@ -85,7 +89,7 @@ function App(props) {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+            <Routes appProps={{isAuthenticated, userHasAuthenticated}}/>
         </div>
     );
 }
