@@ -21,28 +21,19 @@ export default function Login(props) {
 
         setIsLoading(true);
 
-        try {
-            await Auth.signIn(fields.username, fields.password);
+        await Auth.signIn(fields.username, fields.password).then(()=>{
             props.userHasAuthenticated(true);
             props.history.push("/");
-        } catch (e) {
-            if (e.message === "Incorrect username of password") {
-                try {
-                    await Auth.signIn(fields.username, fields.password);
-                    props.userHasAuthenticated(true);
-                    props.history.push("/");
-                } catch(e) {
-                    alert(e.message);
-                    setIsLoading(false);
-                }
-            }
-        }
+        }).catch (e => {
+            alert(e.message);
+            setIsLoading(false);
+        });
     }
 
     return (
         <div className={s.Login}>
             <form onSubmit={handleSubmit}>
-                <FormGroup controlId="username" bsSize="large">
+                <FormGroup controlId="username">
                     <FormLabel>Имя пользователя</FormLabel>
                     <FormControl
                         autoFocus
@@ -51,7 +42,7 @@ export default function Login(props) {
                         onChange={handleFieldChange}
                     />
                 </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
+                <FormGroup controlId="password">
                     <FormLabel>Пароль</FormLabel>
                     <FormControl
                         value={fields.password}
@@ -60,9 +51,9 @@ export default function Login(props) {
                     />
                 </FormGroup>
                 <LoaderButton
+                    variant="outline-success"
                     block
                     type="submit"
-                    bsSize="large"
                     isLoading={isLoading}
                     disabled={!validateForm()}
                 >

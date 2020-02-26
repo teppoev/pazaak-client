@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import { API } from 'aws-amplify';
+import {API} from 'aws-amplify';
 import s from "./Top.module.css";
+import {Spinner} from "react-bootstrap";
 
 export default function Top(props) {
     const [top, setTop] = useState([]);
@@ -23,7 +24,7 @@ export default function Top(props) {
         onLoad();
     }, []);
 
-    function loadTop() {
+    async function loadTop() {
         return API.get("pazaak-rest", "/users/rating");
     }
 
@@ -39,19 +40,28 @@ export default function Top(props) {
 
     return (
         <div className={s.Top}>
-        <table className="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col" key>#</th>
-                <th scope="col">Имя пользователя</th>
-                <th scope="col">Рейтинг</th>
-            </tr>
-            </thead>
-            <tbody>
-            {!isLoading && renderTop(top)}
-            </tbody>
-        </table>
-            {isLoading ? <h3 className={s.Top}>Загрузка свежих данных...</h3> : <></>}
+            <table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" key>#</th>
+                    <th scope="col">Имя пользователя</th>
+                    <th scope="col">Рейтинг</th>
+                </tr>
+                </thead>
+                <tbody>
+                {!isLoading && renderTop(top)}
+                </tbody>
+            </table>
+            {isLoading ? <h3 className={s.Top}>
+                <Spinner
+                    as="span"
+                    animation="border"
+                    role="status"
+                    aria-hidden="true"
+                    style={{marginRight: 20 + 'px'}}
+                />
+                Загрузка свежих данных...
+            </h3> : <></>}
         </div>
     );
 }

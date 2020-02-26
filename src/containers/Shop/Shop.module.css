@@ -1,0 +1,21 @@
+.ShopTable tbody {
+    display: block;
+    height: 750px;
+    overflow-y: scroll;
+}
+.ShopTable tbody tr {
+    cursor: pointer;
+    display: table;
+    width: 100%;
+}
+
+.ShopTable tbody tr td {
+    vertical-align: center;
+    text-align: center;
+}
+
+.CardIcon {
+    box-sizing: content-box;
+    width: 100px;
+    height: 100px;
+}

@@ -2,7 +2,7 @@ import {useFormFields} from "../../libs/hooksLib";
 import React, {useState} from "react";
 import {FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
-import { Auth } from "aws-amplify";
+import {API, Auth} from "aws-amplify";
 import s from "./Signup.module.css";
 
 
@@ -45,7 +45,8 @@ export default function Signup(props) {
             });
             setIsLoading(false);
             setNewUser(newUser);
-        } catch (e) {
+        }
+        catch (e) {
             alert(e.message);
             setIsLoading(false);
         }
@@ -59,7 +60,7 @@ export default function Signup(props) {
         try {
             await Auth.confirmSignUp(fields.nickname, fields.confirmationCode);
             await Auth.signIn(fields.nickname, fields.password);
-
+            await API.post("pazaak-rest", "/register");
             props.userHasAuthenticated(true);
             props.history.push("/");
         } catch (e) {
@@ -71,7 +72,7 @@ export default function Signup(props) {
     function renderConfirmationForm() {
         return (
             <form onSubmit={handleConfirmationSubmit}>
-                <FormGroup controlId="confirmationCode" bsSize="large">
+                <FormGroup controlId="confirmationCode">
                     <FormLabel>Введите код подтверждения</FormLabel>
                     <FormControl
                         autoFocus
@@ -82,9 +83,9 @@ export default function Signup(props) {
                     <FormText className="text-muted">Проверьте свой почтовый ящик.</FormText>
                 </FormGroup>
                 <LoaderButton
+                    variant="outline-success"
                     block
                     type="submit"
-                    bsSize="large"
                     isLoading={isLoading}
                     disabled={!validateConfirmationForm()}
                 >
@@ -97,16 +98,16 @@ export default function Signup(props) {
     function renderForm() {
         return (
             <form onSubmit={handleSubmit}>
-                <FormGroup controlId="nickname" bsSize="large">
+                <FormGroup controlId="nickname">
                     <FormLabel>Имя пользователя</FormLabel>
                     <FormControl
-                        autofocus
+                        autoFocus
                         type="text"
                         value={fields.nickname}
                         onChange={handleFieldChange}
                     />
                 </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
+                <FormGroup controlId="password">
                     <FormLabel>Пароль</FormLabel>
                     <FormControl
                         type="password"
@@ -114,7 +115,7 @@ export default function Signup(props) {
                         onChange={handleFieldChange}
                     />
                 </FormGroup>
-                <FormGroup controlId="confirmPassword" bsSize="large">
+                <FormGroup controlId="confirmPassword">
                     <FormLabel>Подтвердите пароль</FormLabel>
                     <FormControl
                         type="password"
@@ -122,7 +123,7 @@ export default function Signup(props) {
                         value={fields.confirmPassword}
                     />
                 </FormGroup>
-                <FormGroup controlId="email" bsSize="large">
+                <FormGroup controlId="email">
                     <FormLabel>Адрес электронной почты</FormLabel>
                     <FormControl
                         type="email"
@@ -131,9 +132,9 @@ export default function Signup(props) {
                     />
                 </FormGroup>
                 <LoaderButton
+                    variant="outline-success"
                     block
                     type="submit"
-                    bsSize="large"
                     isLoading={isLoading}
                     disabled={!validateForm()}
                 >

@@ -2,8 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Image, Nav, Navbar} from "react-bootstrap";
 import "./App.module.css";
 import Routes from "./containers/Routes/Routes";
-import {withRouter} from "react-router-dom";
-import {LinkContainer} from "react-router-bootstrap";
+import {withRouter, Link} from "react-router-dom";
 import {Auth} from "aws-amplify";
 
 function App(props) {
@@ -37,33 +36,26 @@ function App(props) {
 
     return (
         !isAuthenticating &&
-        <div className="App container">
+        <div className="App container h-100">
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand>
-                    <LinkContainer to="/">
-                        <Image id="PazaakMainMenu"
-                            src="https://external-preview.redd.it/L4S-dK5qg8lTwcfsNygBVLkIB52LicE2nZeG6XNQNgw.png?auto=webp&s=9815c18c109bcd48e74cceabcd8bcd4fa68b74e6"
-                            height="60px"
-                        />
-                    </LinkContainer>
+                <Navbar.Brand
+                    as={Link}
+                    to="/"
+                >
+                    <Image
+                        src="https://external-preview.redd.it/L4S-dK5qg8lTwcfsNygBVLkIB52LicE2nZeG6XNQNgw.png?auto=webp&s=9815c18c109bcd48e74cceabcd8bcd4fa68b74e6"
+                        height="60px"
+                    />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="head-navbar"/>
                 <Navbar.Collapse id="head-navbar">
                     <Nav className="mr-auto">
                         {isAuthenticated
                             ? <>
-                                <LinkContainer to="/play">
-                                    <Nav.Link>Играть</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="/rules">
-                                    <Nav.Link>Правила</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="/shop">
-                                    <Nav.Link>Магазин</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="/top">
-                                    <Nav.Link>Рекорды</Nav.Link>
-                                </LinkContainer>
+                                <Nav.Link as={Link} to="/play">Играть</Nav.Link>
+                                <Nav.Link as={Link} to="/rules">Правила</Nav.Link>
+                                <Nav.Link as={Link} to="/shop">Магазин</Nav.Link>
+                                <Nav.Link as={Link} to="/top">Рекорды</Nav.Link>
                             </>
                             : <>
                             </>
@@ -72,18 +64,12 @@ function App(props) {
                     <Nav>
                         {isAuthenticated
                             ? <>
-                                <LinkContainer to="/profile">
-                                    <Nav.Link>Профиль</Nav.Link>
-                                </LinkContainer>
+                                <Nav.Link as={Link} to="/profile">Профиль</Nav.Link>
                                 <Nav.Link onClick={handleLogout}>Выход</Nav.Link>
                             </>
                             : <>
-                                <LinkContainer to="/signup">
-                                    <Nav.Link>Регистрация</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="/login">
-                                    <Nav.Link>Вход</Nav.Link>
-                                </LinkContainer>
+                                <Nav.Link as={Link} to="/signup">Регистрация</Nav.Link>
+                                <Nav.Link as={Link} to="/login">Вход</Nav.Link>
                             </>
                         }
                     </Nav>
