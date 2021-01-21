@@ -5,9 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 import Amplify from 'aws-amplify';
-import config from './config';
+//import config from './config';
 
-Amplify.configure({
+/*Amplify.configure({
     Auth: {
         mandatorySignIn: true,
         region: config.cognito.REGION,
@@ -24,7 +24,7 @@ Amplify.configure({
             },
         ]
     }
-});
+});*/
 
 ReactDOM.render(
     <BrowserRouter>
