@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from "react";
 import s from "./Profile.module.css";
 import {API} from "aws-amplify";
@@ -144,4 +145,4 @@ export default function Profile(props) {
             }
         </div>
     );
-}
+}*/

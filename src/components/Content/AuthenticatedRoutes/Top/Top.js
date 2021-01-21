@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from "react";
 import {API} from 'aws-amplify';
 import s from "./Top.module.css";
@@ -64,4 +65,4 @@ export default function Top(props) {
             </h3> : <></>}
         </div>
     );
-}
+}*/

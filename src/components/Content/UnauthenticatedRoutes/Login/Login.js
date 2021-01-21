@@ -1,3 +1,4 @@
+/*
 import React, { useState } from "react";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import s from "./Login.module.css";
@@ -62,4 +63,4 @@ export default function Login(props) {
             </form>
         </div>
     );
-}
+}*/

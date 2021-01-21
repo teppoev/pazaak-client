@@ -1,3 +1,4 @@
+/*
 import {useFormFields} from "../../../../libs/hooksLib";
 import React, {useState} from "react";
 import {FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
@@ -149,4 +150,4 @@ export default function Signup(props) {
             {newUser === null ? renderForm() : renderConfirmationForm()}
         </div>
     );
-}
+}*/

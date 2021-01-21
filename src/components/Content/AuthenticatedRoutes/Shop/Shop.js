@@ -1,3 +1,4 @@
+/*
 import React, {useEffect, useState} from "react";
 import s from "./Shop.module.css";
 import {API} from "aws-amplify";
@@ -108,4 +109,4 @@ export default function Shop(props) {
             }
         </div>
     );
-}
+}*/
