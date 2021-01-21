@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import s from "./Login.module.css";
 import { Auth } from "aws-amplify";
-import LoaderButton from "../../components/LoaderButton/LoaderButton";
-import {useFormFields} from "../../libs/hooksLib";
+import LoaderButton from "../../LoaderButton/LoaderButton";
+import {useFormFields} from "../../../../libs/hooksLib";
 
 export default function Login(props) {
     const [isLoading, setIsLoading] = useState(false);

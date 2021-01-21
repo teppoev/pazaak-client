@@ -14,7 +14,7 @@ export default function LoaderButton({
             disabled={disabled || isLoading}
             {...props}
         >
-            {isLoading ? <>
+            {isLoading && <span>
                 <Spinner
                     as="span"
                     animation="border"
@@ -24,7 +24,7 @@ export default function LoaderButton({
                     style={{marginRight: 20 + 'px'}}
                 />
                 Загрузка...
-            </> : <></>}
+            </span>}
             {!isLoading && props.children}
         </Button>
     );

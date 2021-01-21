@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+/*import React, {useEffect, useState} from "react";
 import {Image, Nav, Navbar} from "react-bootstrap";
 import "./App.module.css";
-import Routes from "./containers/Routes/Routes";
-import {withRouter, Link} from "react-router-dom";
-import {Auth} from "aws-amplify";
-
-function App(props) {
+import Routes from "./components/Routes/Routes";
+import Route, {Link, BrowserRouter} from "react-router-dom";
+import {Auth} from "aws-amplify";*/
+/*function App(props) {
     const [isAuthenticated, userHasAuthenticated] = useState(false);
     const [isAuthenticating, setIsAuthenticating] = useState(true);
 
@@ -78,6 +77,18 @@ function App(props) {
             <Routes appProps={{isAuthenticated, userHasAuthenticated}}/>
         </div>
     );
-}
+}*/
 
-export default withRouter(App);
+import React from "react"
+import Header from "./components/Header/Header";
+import Content from "./components/Content/Content";
+import s from './App.module.css'
+
+export default function App(props) {
+    return (
+        <div className={s.app_wrapper}>
+            <Header isAuthenticated={props.isAuthenticated}/>
+            <Content isAuthenticated={props.isAuthenticated}/>
+        </div>
+    )
+}

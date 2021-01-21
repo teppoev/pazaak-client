@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import s from "./Profile.module.css";
 import {API} from "aws-amplify";
 import {Card, Image, Spinner, Table} from "react-bootstrap";
-import LoaderButton from "../../components/LoaderButton/LoaderButton";
+import LoaderButton from "../../LoaderButton/LoaderButton";
 
 export default function Profile(props) {
     const [cards, setCards] = useState([]);

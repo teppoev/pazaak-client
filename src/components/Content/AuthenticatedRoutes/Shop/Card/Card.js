@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {OverlayTrigger, Table, Tooltip} from "react-bootstrap";
 import s from "./Card.module.css";
-import LoaderButton from "../../../components/LoaderButton/LoaderButton";
+import LoaderButton from "../../../LoaderButton/LoaderButton";
 import {API} from "aws-amplify";
 
 export default function Card(props) {

@@ -1,7 +1,7 @@
-import {useFormFields} from "../../libs/hooksLib";
+import {useFormFields} from "../../../../libs/hooksLib";
 import React, {useState} from "react";
 import {FormControl, FormGroup, FormLabel, FormText} from "react-bootstrap";
-import LoaderButton from "../../components/LoaderButton/LoaderButton";
+import LoaderButton from "../../LoaderButton/LoaderButton";
 import {API, Auth} from "aws-amplify";
 import s from "./Signup.module.css";
 
