@@ -1,8 +1,7 @@
-/*
 import React, {useEffect, useState} from "react";
-import {API} from 'aws-amplify';
+import {loadTop} from "../../../../AWS_API";
 import s from "./Top.module.css";
-import {Spinner} from "react-bootstrap";
+import Loading from "../Loading/Loading";
 
 export default function Top(props) {
     const [top, setTop] = useState([]);
@@ -10,24 +9,24 @@ export default function Top(props) {
 
     useEffect(() => {
         async function onLoad() {
-
             try {
-                const top = await loadTop();
-                setTop(top);
+                return await loadTop();
             } catch (e) {
                 console.log(e);
                 alert(e);
             }
-
-            setIsLoading(false);
         }
 
-        onLoad();
-    }, []);
+        let isMounted = true;
+        onLoad().then(top => {
+            if (isMounted) {
+                setTop(top);
+                setIsLoading(false);
+            }
+        });
 
-    async function loadTop() {
-        return API.get("pazaak-rest", "/users/rating");
-    }
+        return () => {isMounted = false;}
+    }, []);
 
     function renderTop(top) {
         return top.map((player, i) => i < 50 ? (
@@ -41,28 +40,20 @@ export default function Top(props) {
 
     return (
         <div className={s.Top}>
-            <table className="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col" key>#</th>
-                    <th scope="col">Имя пользователя</th>
-                    <th scope="col">Рейтинг</th>
-                </tr>
-                </thead>
-                <tbody>
-                {!isLoading && renderTop(top)}
-                </tbody>
-            </table>
-            {isLoading ? <h3 className={s.Top}>
-                <Spinner
-                    as="span"
-                    animation="border"
-                    role="status"
-                    aria-hidden="true"
-                    style={{marginRight: 20 + 'px'}}
-                />
-                Загрузка свежих данных...
-            </h3> : <></>}
+            {isLoading ? <Loading t={props.Loading}/> :
+                <table className="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col" key>{props.t.Sharp}</th>
+                        <th scope="col">{props.t.Username}</th>
+                        <th scope="col">{props.t.Rating}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderTop(top)}
+                    </tbody>
+                </table>
+            }
         </div>
     );
-}*/
+}

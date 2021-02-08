@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Rules(props) {
+export default function Play(props) {
     return (
         <div>
-            Rules
+            {props.t.Text}
         </div>
     );
 }

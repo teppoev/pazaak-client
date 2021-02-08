@@ -1,0 +1,7 @@
+.cardTable {
+    display: flex;
+}
+
+.cardTableColumns {
+    flex: 1;
+}

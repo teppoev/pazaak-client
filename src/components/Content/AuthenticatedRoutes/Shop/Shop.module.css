@@ -1,3 +1,7 @@
+.Shop {
+    text-align: center;
+}
+
 .ShopTable tbody {
     display: block;
     height: 750px;
@@ -17,5 +21,4 @@
 .CardIcon {
     box-sizing: content-box;
     width: 100px;
-    height: 100px;
 }

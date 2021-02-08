@@ -1,0 +1,38 @@
+.CardTable {
+    margin-bottom: 0;
+    height: 700px;
+}
+
+.CardIconsWrapper {
+    max-width: 265px;
+    margin: 0 auto;
+}
+
+.CardIcons {
+    display: flex;
+}
+
+.CardIconWrapper {
+    flex: 1;
+}
+
+.AttributeName {
+    text-align: left;
+    height: 50px;
+}
+
+.AttributeValue {
+    width: 100px;
+    text-align: right;
+}
+
+.CardDescription {
+    text-align: left;
+    overflow-y:scroll;
+    height: 200px;
+}
+
+.ShopButton {
+    width: 100%;
+    height: 50px;
+}

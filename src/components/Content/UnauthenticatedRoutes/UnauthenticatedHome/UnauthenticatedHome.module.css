@@ -1,8 +1,5 @@
-.Home {
+.home {
     text-align: center;
     padding-top: 100px;
     padding-bottom: 100px;
-}
-.Home .nobull {
-    list-style-type:none;
 }

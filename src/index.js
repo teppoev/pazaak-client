@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
-//import Amplify from 'aws-amplify';
-//import config from './config';
+import Amplify from 'aws-amplify';
+import config from './config';
+import strings from './string_consts';
 
-/*Amplify.configure({
+Amplify.configure({
     Auth: {
         mandatorySignIn: true,
         region: config.cognito.REGION,
@@ -18,17 +19,17 @@ import {BrowserRouter} from "react-router-dom";
     API: {
         endpoints: [
             {
-                name: "pazaak-rest",
+                name: config.apiGateway.NAME,
                 endpoint: config.apiGateway.URL,
                 region: config.apiGateway.REGION
             },
         ]
     }
-});*/
+});
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <App t={strings}/>
     </BrowserRouter>
     , document.getElementById('root'));
 

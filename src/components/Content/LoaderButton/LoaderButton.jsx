@@ -1,11 +1,13 @@
 import React from "react";
-import {Button, Spinner} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import s from "./LoaderButton.module.css";
+import Loading from "../AuthenticatedRoutes/Loading/Loading";
 
 export default function LoaderButton({
                                          isLoading,
                                          className = "",
                                          disabled = false,
+                                         t,
                                          ...props
                                      }) {
     return (
@@ -14,18 +16,7 @@ export default function LoaderButton({
             disabled={disabled || isLoading}
             {...props}
         >
-            {isLoading && <span>
-                <Spinner
-                    as="span"
-                    animation="border"
-                    role="status"
-                    aria-hidden="true"
-                    size="sm"
-                    style={{marginRight: 20 + 'px'}}
-                />
-                Загрузка...
-            </span>}
-            {!isLoading && props.children}
+            {isLoading ? <Loading t={t} size="sm"/> : props.children}
         </Button>
     );
 }

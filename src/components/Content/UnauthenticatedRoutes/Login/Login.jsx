@@ -1,41 +1,39 @@
-/*
 import React, { useState } from "react";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import s from "./Login.module.css";
-import { Auth } from "aws-amplify";
 import LoaderButton from "../../LoaderButton/LoaderButton";
 import {useFormFields} from "../../../../libs/hooksLib";
+import {useHistory} from "react-router-dom";
+import {Auth} from "aws-amplify";
 
 export default function Login(props) {
+    const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
     const [fields, handleFieldChange] = useFormFields({
         username: "",
         password: ""
     });
 
-    function validateForm() {
-        return fields.username.length > 0 && fields.password.length > 0;
-    }
-
     async function handleSubmit(event) {
         event.preventDefault();
-
         setIsLoading(true);
-
         await Auth.signIn(fields.username, fields.password).then(()=>{
-            props.userHasAuthenticated(true);
-            props.history.push("/");
+            props.setIsAuthenticated(true);
+            history.push("/");
         }).catch (e => {
             alert(e.message);
             setIsLoading(false);
         });
+    }
+    function validateForm() {
+        return fields.username.length > 0 && fields.password.length > 0;
     }
 
     return (
         <div className={s.Login}>
             <form onSubmit={handleSubmit}>
                 <FormGroup controlId="username">
-                    <FormLabel>Имя пользователя</FormLabel>
+                    <FormLabel>{props.t.Username}</FormLabel>
                     <FormControl
                         autoFocus
                         type="text"
@@ -44,7 +42,7 @@ export default function Login(props) {
                     />
                 </FormGroup>
                 <FormGroup controlId="password">
-                    <FormLabel>Пароль</FormLabel>
+                    <FormLabel>{props.t.Password}</FormLabel>
                     <FormControl
                         value={fields.password}
                         onChange={handleFieldChange}
@@ -58,9 +56,9 @@ export default function Login(props) {
                     isLoading={isLoading}
                     disabled={!validateForm()}
                 >
-                    Войти
+                    {props.t.Login}
                 </LoaderButton>
             </form>
         </div>
     );
-}*/
+}

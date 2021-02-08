@@ -1,0 +1,12 @@
+.deckTable {
+    display: flex;
+}
+
+.deckTableColumns {
+    flex: 1;
+}
+
+.cardWrapper {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}

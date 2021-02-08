@@ -1,20 +1,13 @@
-.DeckTable tbody tr td {
+.profileWrapper {
     text-align: center;
 }
 
-.DeckTable tbody tr td img {
-    max-height: 100px;
+.profile {
+
 }
+
 
 .ChangeDeckButton {
     width: 100%;
     height: 50px;
-}
-
-.CardsTable tbody tr td {
-    cursor: pointer;
-}
-
-.CardsCard {
-    text-align: center;
 }

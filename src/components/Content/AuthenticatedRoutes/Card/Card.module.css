@@ -1,0 +1,19 @@
+.scalingSvgContainer {
+    margin: 10px;
+}
+
+.defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: -1;
+}
+
+.count {
+    font-family: "Copperplate Gothic Bold", fantasy;
+    font-size: 14px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    fill: white;
+
+}

@@ -1,0 +1,12 @@
+.text {
+    font-family: "Copperplate Gothic Bold", fantasy;
+    font-size: 26px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    fill: white;
+}
+
+.cardBodyFill {
+    width: 100%;
+    height: 100%;
+}
