@@ -11,7 +11,7 @@ export default function CardConstructor({cardName, typePartURL, sign, isChangeab
         }
         switch(cardName) {
             case "±1T":
-                return `#svg-card-gradient-${typePartURL}-tidebreaker`;
+                return `#svg-card-gradient-${typePartURL}-tiebreaker`;
             default:
                 return `#svg-card-gradient-${typePartURL}`;
         }

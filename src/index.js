@@ -19,10 +19,15 @@ Amplify.configure({
     API: {
         endpoints: [
             {
-                name: config.apiGateway.NAME,
-                endpoint: config.apiGateway.URL,
-                region: config.apiGateway.REGION
+                name: config.apiGateway.rest.NAME,
+                endpoint: config.apiGateway.rest.URL,
+                region: config.apiGateway.rest.REGION
             },
+            {
+                name: config.apiGateway.webSockets.NAME,
+                endpoint: config.apiGateway.webSockets.CONNECTION_URL,
+                region: config.apiGateway.webSockets.REGION
+            }
         ]
     }
 });

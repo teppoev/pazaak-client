@@ -50,7 +50,9 @@ export default function Shop(props) {
     const isInitialMount = useRef(true);
 
     /**
-     * @param e.balance
+     * @param profile.balance
+     * @param profile.cards
+     * @param profile.deck
      */
 
     function fillInfoAfterFetching(profile, cardDispatchType, card = {}) {

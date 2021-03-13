@@ -9,8 +9,8 @@ export default function CardColors() {
     const specialOpacityColor = "rgb(255,255,0)"
     const simpleBaseColor = "rgb(0,120,0)"
     const simpleOpacityColor = "rgb(0,255,0)"
-    const tidebreakerBaseColor = "rgb(60,0,60)"
-    const tidebreakerOpacityColor = "rgb(10,0,10)"
+    const tiebreakerBaseColor = "rgb(60,0,60)"
+    const tiebreakerOpacityColor = "rgb(10,0,10)"
 
     return (
         <defs>
@@ -54,9 +54,9 @@ export default function CardColors() {
                 <stop offset="10%" stopColor={negativeOpacityColor}/>
                 <stop offset="95%" stopColor={negativeBaseColor}/>
             </radialGradient>
-            <radialGradient id="svg-card-gradient-champion-tidebreaker" cy="37.5%" spreadMethod="reflect">
-                <stop offset="10%" stopColor={tidebreakerOpacityColor}/>
-                <stop offset="95%" stopColor={tidebreakerBaseColor}/>
+            <radialGradient id="svg-card-gradient-champion-tiebreaker" cy="37.5%" spreadMethod="reflect">
+                <stop offset="10%" stopColor={tiebreakerOpacityColor}/>
+                <stop offset="95%" stopColor={tiebreakerBaseColor}/>
             </radialGradient>
         </defs>
     )

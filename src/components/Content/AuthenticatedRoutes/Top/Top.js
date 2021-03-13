@@ -44,7 +44,7 @@ export default function Top(props) {
                 <table className="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col" key>{props.t.Sharp}</th>
+                        <th scope="col">{props.t.Sharp}</th>
                         <th scope="col">{props.t.Username}</th>
                         <th scope="col">{props.t.Rating}</th>
                     </tr>

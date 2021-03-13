@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {OverlayTrigger, Table, Tooltip} from "react-bootstrap";
 import s from "./CardPanel.module.css";
 import LoaderButton from "../../../LoaderButton/LoaderButton";
-import {patchAccount} from "../../../../../AWS_API";
+import {buyCard} from "../../../../../AWS_API";
 import Card from "../../Card/Card";
 import Loading from "../../Loading/Loading";
 
@@ -17,7 +17,7 @@ export default function CardPanel(props) {
         setIsLoading(true);
 
         try {
-            const response = await patchAccount(props.card.card_id.N);
+            const response = await buyCard(props.card.card_id.N);
             if (response.message === "You don't have enough money") alert("Недостаточно кредитов!");
             else {
                 props.setCredits(response.balance.N);

@@ -20,6 +20,7 @@ export default function Profile(props) {
     const [cards, setCards] = useState([]);
     const [myCards, setMyCards] = useState({});
     const [myDeck, setMyDeck] = useState([]);
+    const [oldDeck, setOldDeck] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export default function Profile(props) {
                 setCards(cards);
                 setMyCards(profile.cards.M);
                 setMyDeck(profile.deck.L);
+                setOldDeck(profile.deck.L);
                 setIsLoading(false);
             }
         });
@@ -59,7 +61,7 @@ export default function Profile(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <SaveDeckButton myDeck={myDeck} myCards={myCards}
+                        <SaveDeckButton oldDeck={oldDeck} setOldDeck={setOldDeck} myDeck={myDeck} myCards={myCards}
                                         t={{save: props.t.SaveDeckButton, loading: props.Loading}}/>
                                             <CleanDeckButton t={props.t.CleanDeckButton} myCards={myCards} myDeck={myDeck} cards={cards}
                                             setMyCards={setMyCards} setMyDeck={setMyDeck}/>
