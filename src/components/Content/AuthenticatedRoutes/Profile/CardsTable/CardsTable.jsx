@@ -4,7 +4,6 @@ import Card from "../../Card/Card";
 
 export default function CardsTable({myCards, cards, myDeck, setMyCards, setMyDeck}) {
     function moveFromCardsToDeck(index) {
-        console.log(`${index} was clicked`)
         let deckIndex = myDeck.findIndex(x => x.NULL === true);
         if (deckIndex === -1) return;
         let cardId = cards[index].card_id.N

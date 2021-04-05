@@ -72,3 +72,17 @@ export async function getConnectedUsers() {
 export async function getUserName() {
     return (await Auth.currentUserInfo())['username'];
 }
+
+export async function throwChallenge(username, wager) {
+    return API.put(config.apiGateway.rest.NAME, "/users/connected/challenge/throw", {
+        body: {
+            opponent: {
+                username: username
+            },
+            wager: wager
+        },
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    });
+}

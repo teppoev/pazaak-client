@@ -1,0 +1,68 @@
+.request {
+    border: solid black 1px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.categoryOfRequest {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.incomingRequestButtons Button, .outcomingRequestButtons Button{
+    margin-bottom: 10px;
+}
+
+.incomingRequest {}
+
+.outcomingRequest {
+    background: lightyellow;
+}
+
+.wagerLabel {
+    margin-right: 10px;
+}
+
+.wagerTextInput {
+    width: 60%;
+    text-align: end;
+}
+
+/* The slider itself */
+.wagerRangeInput {
+    margin-top: 10px;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 15px; /* Specified height */
+    border-radius: 5px;
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.wagerRangeInput:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.wagerRangeInput::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    border-radius: 50%;
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.wagerRangeInput::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    border-radius: 50%;
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}

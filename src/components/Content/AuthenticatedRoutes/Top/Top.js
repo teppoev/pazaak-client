@@ -32,7 +32,7 @@ export default function Top(props) {
         return top.map((player, i) => i < 50 ? (
             <tr key={i + 1}>
                 <th scope="row">{i + 1}</th>
-                <td>{player.user_id.S}</td>
+                <td>{player.username.S}</td>
                 <td>{player.rating.N}</td>
             </tr>
         ) : (<></>));

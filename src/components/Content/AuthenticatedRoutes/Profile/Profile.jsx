@@ -43,7 +43,9 @@ export default function Profile(props) {
                 setIsLoading(false);
             }
         });
-        return () => {isMounted = false;}
+        return () => {
+            isMounted = false;
+        }
     }, [])
 
     return (
@@ -63,11 +65,11 @@ export default function Profile(props) {
                     <Row>
                         <SaveDeckButton oldDeck={oldDeck} setOldDeck={setOldDeck} myDeck={myDeck} myCards={myCards}
                                         t={{save: props.t.SaveDeckButton, loading: props.Loading}}/>
-                                            <CleanDeckButton t={props.t.CleanDeckButton} myCards={myCards} myDeck={myDeck} cards={cards}
-                                            setMyCards={setMyCards} setMyDeck={setMyDeck}/>
-                                            </Row>
-                                            </Container>
-                                            }
-                                            </div>
-                                            );
-                                        }
+                        <CleanDeckButton t={props.t.CleanDeckButton} myCards={myCards} myDeck={myDeck} cards={cards}
+                                         setMyCards={setMyCards} setMyDeck={setMyDeck}/>
+                    </Row>
+                </Container>
+            }
+        </div>
+    );
+}

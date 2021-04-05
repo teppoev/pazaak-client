@@ -96,7 +96,7 @@ export default function CardPanel(props) {
                                 onClick={handleBuy}>
                                 Купить
                             </LoaderButton> :
-                            <OverlayTrigger overlay={<Tooltip>Недостаточно кредитов!</Tooltip>}>
+                            <OverlayTrigger overlay={<Tooltip id='not-enough-money'>Недостаточно кредитов!</Tooltip>}>
                 <span>
                     <LoaderButton
                         className={`${s.ShopButton}`}
