@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {loadTop} from "../../../../AWS_API";
 import s from "./Top.module.css";
 import Loading from "../Loading/Loading";
 
 export default function Top(props) {
-    const [top, setTop] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [top, setTop] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         async function onLoad() {
             try {
                 return await loadTop();

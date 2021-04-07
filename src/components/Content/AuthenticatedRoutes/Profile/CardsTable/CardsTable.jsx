@@ -3,6 +3,14 @@ import React from "react";
 import Card from "../../Card/Card";
 
 export default function CardsTable({myCards, cards, myDeck, setMyCards, setMyDeck}) {
+    function countOfChampionCards(cardID) {
+        let counter = myCards[cardID] ? myCards[cardID].N : 0
+        for (let card of myDeck) {
+            if (card.N === cardID) ++counter
+        }
+        return counter
+    }
+
     function moveFromCardsToDeck(index) {
         let deckIndex = myDeck.findIndex(x => x.NULL === true);
         if (deckIndex === -1) return;
@@ -36,7 +44,7 @@ export default function CardsTable({myCards, cards, myDeck, setMyCards, setMyDec
             divs.push([]);
         }
 
-        (cards).map((card, i) => {
+        cards.map((card, i) => {
             divs[i % 6].push(card);
             return card;
         });
@@ -48,7 +56,7 @@ export default function CardsTable({myCards, cards, myDeck, setMyCards, setMyDec
                         let count = myCards[card.card_id.N] ? myCards[card.card_id.N].N : 0
                         return (
                             <div key={`cards-row-${i}-element-${6*i+j}`}>
-                                {card.card_type.S === "champion"
+                                {card.card_type.S === "champion" && countOfChampionCards(card.card_id.N) === 0
                                     ? <Card cardName={card.card_name.S} cardType="unopened"/>
                                     : <Card cardName={card.card_name.S} cardType={card.card_type.S}
                                                     count={count} onClick={()=> {moveFromCardsToDeck(6 * j + i)}}/>

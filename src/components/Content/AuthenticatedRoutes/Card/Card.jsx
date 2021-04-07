@@ -4,6 +4,7 @@ import CardColors from "./CardColors/CardColors";
 import CardByType from "./CardByType/CardByType";
 
 export default function Card({cardType, cardName, count, isEmpty, onClick}) {
+    const validCardTypes = ["positive", "negative", "changeable", "reverse-changeable", "special", "champion"]
 
     return (
         <div>
@@ -16,7 +17,10 @@ export default function Card({cardType, cardName, count, isEmpty, onClick}) {
                     {
                         !isEmpty
                             ? <g>
-                                <use xlinkHref={`#svg-card-${cardType}-${cardName}`}/>
+                                <use
+                                    xlinkHref={validCardTypes.indexOf(cardType) !== -1 ?
+                                        `#svg-card-${cardType}-${cardName}` :
+                                        `#svg-card-unrecognized-type-${cardName}`}/>
                                 {count != null && <text className={s.count} x="90%" y="95%">{count}</text>}
                             </g>
                             : <g>

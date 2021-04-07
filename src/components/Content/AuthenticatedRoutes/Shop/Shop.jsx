@@ -76,7 +76,7 @@ export default function Shop(props) {
             try {
                 cards = await loadCards();
                 if (isMounted) {
-                    setCards(cards);
+                    setCards(cards.filter(i => i.card_type.S !== "champion"));
                     setIsLoadingShopFeed(false);
                 }
                 profile = await loadProfile();
