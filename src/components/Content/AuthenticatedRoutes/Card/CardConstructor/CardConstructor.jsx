@@ -18,7 +18,7 @@ export default function CardConstructor({cardName, typePartURL, sign, isChangeab
     }
 
     return (
-        <symbol id={`svg-card-${typePartURL}-${cardName}`}>
+        <symbol id={typePartURL ? `svg-card-${typePartURL}-${cardName}` : `svg-card-unrecognized-type-${cardName}`}>
             {isUnopened
                 ? <g>
                     <defs>

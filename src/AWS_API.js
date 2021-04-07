@@ -73,14 +73,65 @@ export async function getUserName() {
     return (await Auth.currentUserInfo())['username'];
 }
 
-export async function throwChallenge(username, wager) {
+export async function throwChallenge(username, wager, wasChanged) {
     return API.put(config.apiGateway.rest.NAME, "/users/connected/challenge/throw", {
+        body: {
+            opponent: {
+                username: username
+            },
+            wager: {
+                value: wager,
+                wasChanged: wasChanged
+            }
+        },
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    });
+}
+
+export async function cancelChallenge(username) {
+    return API.put(config.apiGateway.rest.NAME, "/users/connected/challenge/cancel", {
+        body: {
+            opponent: {
+                username: username
+            }
+        },
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    })
+}
+
+export async function denyChallenge(username) {
+    return API.put(config.apiGateway.rest.NAME, "/users/connected/challenge/deny", {
+        body: {
+            opponent: {
+                username: username
+            }
+        },
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    })
+}
+
+export async function acceptChallenge(username, wager) {
+    return API.put(config.apiGateway.rest.NAME, "/users/connected/challenge/accept", {
         body: {
             opponent: {
                 username: username
             },
             wager: wager
         },
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    });
+}
+
+export async function giveUpMatch() {
+    return API.put(config.apiGateway.rest.NAME, "/match/give-up", {
         queryStringParameters: {
             accessToken: await getAccessToken()
         }

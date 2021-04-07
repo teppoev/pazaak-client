@@ -1,0 +1,52 @@
+.header {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.userName {
+    text-align: left;
+}
+
+.rating {
+    text-align: right;
+}
+
+.userNameAndRatingLabels {
+    margin-right: 1px;
+
+}
+
+.emptyList {
+    text-align: center;
+}
+
+.listOfPlayersWrapper {
+    border: 1px solid lightgrey;
+    background: rgba(249, 249, 249, 1.0);
+    height: 900px;
+    text-align: center;
+}
+
+.listOfRequestsWrapper {
+    border: 1px solid lightgrey;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    max-height: 900px;
+    padding-bottom: 60px;
+}
+
+.players {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.renderButton {
+    background: white;
+}
+
+.userInfo {
+    float: left;
+    margin-right: 20px;
+}
