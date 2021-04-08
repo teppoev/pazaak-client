@@ -10,7 +10,7 @@ function locationOf(element, array, start = 0, end = array.length, key = (e => e
     let pivot = Math.floor(start + (end - start) / 2);
     if (array[pivot] === null && key(array[pivot]) === element) return -1;
     if (end - start < 1) return pivot;
-    if (key(array[pivot]) < element) {
+    if (key(array[pivot]) > element) {
         return locationOf(element, array, pivot + 1, end, key);
     } else {
         return locationOf(element, array, start, pivot, key);
@@ -18,17 +18,30 @@ function locationOf(element, array, start = 0, end = array.length, key = (e => e
 }
 
 export default function SearchGame({setCurrentMatchID, ws}) {
-    const initialRequestOutState = React.useMemo(() => { return {
-        username: "",
-        rating: 0,
-        wager: 0,
-        wasChanged: false
-    }}, [])
+    const initialRequestOutState = React.useMemo(() => {
+        return {
+            username: "",
+            rating: 0,
+            wager: 0,
+            wasChanged: false
+        }
+    }, [])
     const [account, setAccount] = React.useState({})
     const [connectedUsers, setConnectedUsers] = React.useState([])
     const [requestsIn, setRequestsIn] = React.useState([])
     const [requestOut, setRequestOut] = React.useState(initialRequestOutState)
     const [isLoading, setIsLoading] = React.useState(true)
+
+    function removeFromRequestsIn(el) {
+        setRequestsIn(oldList => oldList.filter(i => i.username !== el))
+        setConnectedUsers(oldList => {
+            let newList = [...oldList];
+            let index = newList.findIndex(i => i.username === el);
+            if (index === -1) return newList
+            newList[index] = {...newList[index], thrownRequest: false}
+            return newList;
+        })
+    }
 
     React.useEffect(() => {
         async function onLoad() {
@@ -43,7 +56,8 @@ export default function SearchGame({setCurrentMatchID, ws}) {
                 if (isMounted) {
                     setAccount(account)
                     connectedUsers = connectedUsers.filter(i => i.username !== account.username.S);
-                    connectedUsers.sort((a, b) => a.rating < b.rating);
+                    connectedUsers.sort((a, b) => a.rating > b.rating ? -1 : 1);
+                    connectedUsers.map((e) => e.thrownRequest = false)
                     setConnectedUsers(connectedUsers);
 
                     ws.onmessage = evt => {
@@ -57,7 +71,7 @@ export default function SearchGame({setCurrentMatchID, ws}) {
                                     if (oldList.findIndex(el => el.username === message.body.username) === -1) {
                                         let loc = locationOf(message.body.rating, oldList, 0, oldList.length,
                                             (e => e.rating));
-                                        newList.splice(loc, 0, message.body)
+                                        newList.splice(loc, 0, {...message.body, thrownRequest: false})
                                     }
                                     return newList;
                                 })
@@ -82,15 +96,22 @@ export default function SearchGame({setCurrentMatchID, ws}) {
                                     setRequestOut(initialRequestOutState)
                                 }
                                 setRequestsIn(oldList => {
-                                    if (oldList.indexOf(i => i.username === message.body.username) !== -1) return oldList;
+                                    if (oldList.findIndex(i => i.username === message.body.username) !== -1) return oldList;
                                     let newList = [...oldList];
                                     newList.splice(0, 0, body)
+                                    return newList;
+                                })
+                                setConnectedUsers(oldList => {
+                                    let newList = [...oldList];
+                                    let index = oldList.findIndex(i =>  i.username === message.body.username);
+                                    if (index === -1) return newList;
+                                    newList[index] = {...newList[index], thrownRequest: true}
                                     return newList;
                                 })
                                 break;
                             }
                             case "remove cancelled request": {
-                                setRequestsIn(oldList => oldList.filter(i => i.username !== message.username))
+                                removeFromRequestsIn(message.username)
                                 break;
                             }
                             case "remove denied request": {
@@ -142,7 +163,8 @@ export default function SearchGame({setCurrentMatchID, ws}) {
                     <Request key={i} account={account} isIncoming
                              setRequestsIn={setRequestsIn} isRequestOutNotEmpty={isRequestOutNotEmpty}
                              setRequestOut={setRequestOut}
-                             opponent={{username: e.username, rating: e.rating, wager: e.wager}}/>)}
+                             opponent={{username: e.username, rating: e.rating, wager: e.wager}}
+                             removeFromRequestsIn={removeFromRequestsIn}/>)}
             </div>
         }
     }
@@ -160,8 +182,8 @@ export default function SearchGame({setCurrentMatchID, ws}) {
             </Row>
         } else {
             return connectedUsers.map((e, i) =>
-                <RequestButton key={i} element={e} isDisabled={isRequestOutNotEmpty}
-                               setRequestOut={setRequestOut}/>)
+                <RequestButton key={i} element={e} isRequestOutNotEmpty={isRequestOutNotEmpty}
+                               setRequestOut={setRequestOut} connectedUsers={connectedUsers}/>)
         }
     }
 
@@ -176,7 +198,8 @@ export default function SearchGame({setCurrentMatchID, ws}) {
                         Рейтинг: {isLoading ? <Loading size="sm"/> : account.rating.N}
                     </span>
                     <span className={s.userInfo}>
-                        Максимальная ставка: {isLoading ? <Loading size="sm"/> : Math.min(account.max_wager, account.balance.N)}
+                        Максимальная ставка: {isLoading ?
+                        <Loading size="sm"/> : Math.min(account.max_wager, account.balance.N)}
                     </span>
                 </Col>
             </Row>

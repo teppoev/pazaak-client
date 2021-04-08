@@ -10,7 +10,8 @@ export default function Request({
                                     isRequestOutNotEmpty,
                                     setRequestOut,
                                     setRequestsIn,
-                                    initialRequestOutState
+                                    initialRequestOutState,
+                                    removeFromRequestsIn
                                 }) {
     /**
      * @param e.max_wager
@@ -115,7 +116,7 @@ export default function Request({
                         </Button>
                         <Button variant="danger" block onClick={() => {
                             handleDeny().then(() => {
-                                setRequestsIn(oldList => oldList.filter(i => i.username !== opponent.username))
+                                removeFromRequestsIn(opponent.username)
                             })
                         }}>
                             Отклонить

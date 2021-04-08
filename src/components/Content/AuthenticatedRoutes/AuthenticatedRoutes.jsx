@@ -19,7 +19,7 @@ export default function AuthenticatedRoutes(props) {
             <Route path='/top' exact render={() => <Top t={props.t.Top} Loading={props.t.Loading}/>}/>
             <Redirect from="/login" to="/profile"/>
             <Redirect from="/signup" to="/profile"/>
-            <Route render={() => <NotFound />}/>
+            <Route render={() => <NotFound t={props.NotFound}/>}/>
         </Switch>
     )
 }
