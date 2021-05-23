@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import s from "./Profile.module.css";
-import {loadCards, loadProfile} from "../../../../AWS_API";
+import {getCards, loadProfile} from "../../../../AWS_API";
 import CardsTable from "./CardsTable/CardsTable";
 import DeckTable from "./DeckTable/DeckTable";
 import Loading from "../Loading/Loading";
@@ -26,7 +26,7 @@ export default function Profile(props) {
     useEffect(() => {
         async function onLoad() {
             try {
-                return {cards: await loadCards(), profile: await loadProfile()};
+                return {cards: await getCards("profile"), profile: await loadProfile()};
             } catch (e) {
                 console.log(e.message);
                 alert(e.message);

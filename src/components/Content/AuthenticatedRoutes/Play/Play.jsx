@@ -10,6 +10,8 @@ export default function Play() {
      * @param e.opponentname
      * @param e.current_match_id
      * @param e.match_id
+     * @param e.me
+     * @param e.rounds_won
      */
     const ws = React.useRef({});
 

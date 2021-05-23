@@ -5,3 +5,7 @@
 .cardTableColumns {
     flex: 1;
 }
+
+.cardCell {
+    margin: 10px;
+}

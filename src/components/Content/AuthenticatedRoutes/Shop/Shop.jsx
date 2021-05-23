@@ -3,7 +3,7 @@ import s from "./Shop.module.css";
 import {Col, Container, Row, Table} from "react-bootstrap";
 import CardPanel from "./Card/CardPanel";
 import Loading from "../Loading/Loading";
-import {loadCards, loadProfile} from "../../../../AWS_API";
+import {getCards, loadProfile} from "../../../../AWS_API";
 import Card from "../Card/Card";
 
 export default function Shop(props) {
@@ -74,7 +74,7 @@ export default function Shop(props) {
         async function getCardsAndProfile() {
             let cards, profile;
             try {
-                cards = await loadCards();
+                cards = await getCards("shop");
                 if (isMounted) {
                     setCards(cards.filter(i => i.card_type.S !== "champion"));
                     setIsLoadingShopFeed(false);

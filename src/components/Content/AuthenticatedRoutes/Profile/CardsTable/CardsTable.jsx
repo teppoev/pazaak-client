@@ -55,7 +55,7 @@ export default function CardsTable({myCards, cards, myDeck, setMyCards, setMyDec
                     row.map((card, j) => {
                         let count = myCards[card.card_id.N] ? myCards[card.card_id.N].N : 0
                         return (
-                            <div key={`cards-row-${i}-element-${6*i+j}`}>
+                            <div key={`cards-row-${i}-element-${6*i+j}`} className={s.cardCell}>
                                 {card.card_type.S === "champion" && countOfChampionCards(card.card_id.N) === 0
                                     ? <Card cardName={card.card_name.S} cardType="unopened"/>
                                     : <Card cardName={card.card_name.S} cardType={card.card_type.S}

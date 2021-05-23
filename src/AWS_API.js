@@ -5,8 +5,12 @@ export async function getAccessToken() {
     return (await Auth.currentSession()).getAccessToken().getJwtToken();
 }
 
-export async function loadCards() {
-    return API.get(config.apiGateway.rest.NAME, "/cards", {});
+export async function getCards(key='match') {
+    return API.get(config.apiGateway.rest.NAME, "/cards", {
+        queryStringParameters: {
+            key: key
+        }
+    });
 }
 
 export async function loadProfile() {
@@ -132,6 +136,25 @@ export async function acceptChallenge(username, wager) {
 
 export async function giveUpMatch() {
     return API.put(config.apiGateway.rest.NAME, "/match/give-up", {
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    });
+}
+
+export async function getMatchInfo() {
+    return API.get(config.apiGateway.rest.NAME, "/match", {
+        queryStringParameters: {
+            accessToken: await getAccessToken()
+        }
+    });
+}
+
+export async function makeMove(move) {
+    return API.put(config.apiGateway.rest.NAME, "/match", {
+        body: {
+            move: move
+        },
         queryStringParameters: {
             accessToken: await getAccessToken()
         }

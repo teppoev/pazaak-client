@@ -3,6 +3,9 @@ import React from "react";
 
 export default function CardByType({cardType, cardName}) {
     switch (cardType) {
+        case "empty": {
+            return <CardConstructor/>
+        }
         case "simple": {
             return <CardConstructor cardName={cardName} typePartURL={cardType}/>
         }
@@ -18,10 +21,12 @@ export default function CardByType({cardType, cardName}) {
         case "reverse-changeable": {
             return <CardConstructor cardName={cardName} isChangeable sign={'-'} typePartURL={cardType}/>
         }
-        case "special": {
+        case "special":
+        case "reverse-special": {
             return <CardConstructor cardName={cardName} typePartURL={cardType}/>
         }
-        case "champion": {
+        case "champion":
+        case "reverse-champion": {
             switch (cardName) {
                 case "±1T": {
                     return <CardConstructor cardName={cardName} typePartURL={cardType}/>

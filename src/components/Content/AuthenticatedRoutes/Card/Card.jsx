@@ -4,7 +4,15 @@ import CardColors from "./CardColors/CardColors";
 import CardByType from "./CardByType/CardByType";
 
 export default function Card({cardType, cardName, count, isEmpty, onClick}) {
-    const validCardTypes = ["positive", "negative", "changeable", "reverse-changeable", "special", "champion"]
+    const validCardTypes = [
+        "empty",
+        "simple",
+        "positive",
+        "negative",
+        "changeable", "reverse-changeable",
+        "special", "reverse-special",
+        "champion", "reverse-changeable"
+    ]
 
     return (
         <div>

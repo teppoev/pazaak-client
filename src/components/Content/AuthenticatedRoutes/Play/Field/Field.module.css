@@ -1,0 +1,86 @@
+.leftBlock {
+    text-align: left;
+    border-right: 1px gray solid;
+}
+
+.leftCenterBlock {
+    text-align: right;
+    border-right: 1px gray solid;
+}
+
+.centerBlock {
+    text-align: center;
+}
+
+.rightCenterBlock {
+    text-align: left;
+    border-left: 1px gray solid;
+}
+
+.rightBlock {
+    text-align: right;
+    border-left: 1px gray solid;
+}
+
+.upperInfoHeader {
+    margin-top: 20px;
+    padding: 5px 0px;
+    background: #E0E0E0;
+}
+
+.middleInfoHeader {
+    margin-top: 5px;
+    padding: 5px 0px;
+    background: #F0F0F0;
+}
+
+.lowerInfoHeader {
+    margin-top: 5px;
+    padding: 5px 0px;
+    background: #FAFAFA;
+}
+
+.half {
+    margin-top: 30px;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
+.field {
+    background: #FAFAFA;
+}
+
+.fieldRow {
+}
+
+.fieldCell {
+    border: solid 1px grey;
+    padding: 0px;
+    margin: 5px;
+    background: #F0F0F0;
+}
+
+.hand {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.handCell {
+    border: solid 1px grey;
+}
+
+.handCellWrapper {
+    padding: 0px;
+    margin: 5px;
+}
+
+.button {
+    padding: 1px;
+}
+
+.changeCardButton {
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 15px;
+}
